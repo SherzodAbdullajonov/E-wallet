@@ -1,0 +1,140 @@
+basePath: /
+definitions:
+  models.Accounts:
+    properties:
+      balance:
+        type: number
+      created_at:
+        type: string
+      id:
+        type: integer
+      identified:
+        type: boolean
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.TopUps:
+    properties:
+      account_id:
+        type: integer
+      amount:
+        type: number
+      created_at:
+        type: string
+      id:
+        type: integer
+    type: object
+  models.Users:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: support@swagger.io
+    name: API supporter
+    url: http://www.swagger.io/support
+  description: Description of specifications
+  license:
+    name: license(Mandatory)
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: API document title
+  version: version(1.0)
+paths:
+  /balance:
+    post:
+      consumes:
+      - application/json
+      description: get all balance from the database.
+      operationId: get-all-Balance
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: struct
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Accounts'
+      summary: Show balance.
+      tags:
+      - Accounts
+  /top_up:
+    post:
+      consumes:
+      - application/json
+      description: Top-up e-wallet account.
+      operationId: top-up
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: struct
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.TopUps'
+      summary: Top up the Balance.
+      tags:
+      - TopUps
+  /total:
+    post:
+      consumes:
+      - application/json
+      description: Get total count and total amount of top-up operations for current
+        month.
+      operationId: get-all-Students
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: struct
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.TopUps'
+      summary: Get total balance.
+      tags:
+      - TopUps
+  /user/{id}:
+    post:
+      consumes:
+      - application/json
+      description: Check user if it is exist or not.
+      operationId: check-acount
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Users'
+      summary: Check user.
+      tags:
+      - Students
+swagger: "2.0"
